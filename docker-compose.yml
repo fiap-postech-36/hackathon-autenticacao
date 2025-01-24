@@ -2,6 +2,7 @@ version: "3.8"
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
     environment:
       - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
       - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
@@ -9,6 +10,5 @@ services:
       - 8080:8080
     volumes:
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
-    command:
-      - "-Dkeycloak.import=/opt/keycloak/data/import/realm-export.json"
+    command: start-dev --import-realm
     restart: always
