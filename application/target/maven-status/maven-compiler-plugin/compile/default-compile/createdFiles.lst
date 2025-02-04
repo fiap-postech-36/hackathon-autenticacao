@@ -1,0 +1,5 @@
+br\com\autentication\application\controllers\UserController.class
+br\com\autentication\App.class
+br\com\autentication\application\infra\KeycloakConfig.class
+br\com\autentication\application\service\KeycloakUserService.class
+br\com\autentication\application\service\UserRequest.class
