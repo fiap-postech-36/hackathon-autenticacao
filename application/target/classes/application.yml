@@ -1,0 +1,8 @@
+keycloak:
+  server-url: ${SERVER_URL:http://localhost:8080}
+  realm: ${REALM:master}
+  realm-auth: ${REALM_AUTH:auth}
+  client-id: ${CLIENT_ID:admin-cli}
+  client-auth-id: ${CLIENT_AUTH_ID:auth-client}
+  username: ${USERNAME_KEYCLOACK:fiap}
+  password: ${PASSWORD_KEYCLOACK:fiap123}

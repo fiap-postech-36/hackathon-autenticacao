@@ -4,11 +4,29 @@ services:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
     environment:
-      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
-      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+      - KEYCLOAK_ADMIN=fiap
+      - KEYCLOAK_ADMIN_PASSWORD=fiap123
     ports:
       - 8080:8080
     volumes:
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
     command: start-dev --import-realm
     restart: always
+  autenticacao:
+    build: .
+    ports:
+      - "8083:8080"
+    environment:
+      - SERVER_URL=http://keycloak:8080
+      - REALM=master
+      - REALM_AUTH=auth
+      - CLIENT_ID=admin-cli
+      - CLIENT_AUTH_ID=auth-client
+      - USERNAME_KEYCLOACK=fiap
+      - PASSWORD_KEYCLOACK=fiap123
+    depends_on:
+      - keycloak
+
+networks:
+  my_network:
+    driver: bridge
