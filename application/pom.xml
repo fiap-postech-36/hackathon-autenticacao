@@ -8,7 +8,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-
     <artifactId>application</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>application</name>
@@ -32,8 +31,10 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-admin-client</artifactId>
-            <version>22.0.5</version> <!-- Use a versão correspondente ao seu Keycloak -->
+            <version>22.0.5</version>
         </dependency>
+
+        <!-- Jakarta WS API (remove duplicate between jakarta.ws.rs and javax.ws.rs) -->
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
@@ -41,18 +42,41 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Lombok (opcional) -->
+        <!-- Lombok (optional) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Spring Boot DevTools (opcional) -->
+        <!-- Spring Boot DevTools (optional) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.2.4.RELEASE</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -62,6 +86,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Jacoco Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -105,20 +131,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>1.5.5.Final</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
+
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
