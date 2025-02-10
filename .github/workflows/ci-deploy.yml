@@ -23,6 +23,10 @@ jobs:
 
     - name: Build and deploy Keycloak
       run: |
+        docker build \
+            --build-arg KEYCLOAK_ADMIN=${{ secrets.KEYCLOAK_ADMIN }} \
+            --build-arg KEYCLOAK_ADMIN_PASSWORD=${{ secrets.KEYCLOAK_ADMIN_PASSWORD }} \
+            -t meu-keycloak -f DockerfileKeycloak .
         docker-compose up -d
       env:
         KEYCLOAK_ADMIN: ${{ secrets.KEYCLOAK_ADMIN }}
