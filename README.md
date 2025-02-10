@@ -31,7 +31,11 @@ O Keycloak oferece um fluxo de autenticação robusto baseado em protocolos de s
 1. Execute o comando abaixo para iniciar um container do Keycloak:
 
 ```bash
-docker docker-compose up -d
+docker build -t keycloak -f DockerfileKeycloak .
+```
+
+```bash
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=fiap -e KEYCLOAK_ADMIN_PASSWORD=fiap123 keycloak
 ```
 
 2. Acesse o console administrativo do Keycloak no seguinte link:

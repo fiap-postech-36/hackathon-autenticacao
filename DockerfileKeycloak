@@ -1,0 +1,29 @@
+# Usa a imagem oficial do Keycloak como base
+FROM quay.io/keycloak/keycloak:latest
+
+# Define argumentos para capturar as variáveis de ambiente
+ARG KEYCLOAK_ADMIN
+ARG KEYCLOAK_ADMIN_PASSWORD
+
+# Define o diretório de trabalho
+WORKDIR /opt/keycloak
+
+# Copia o arquivo de configuração do realm para o diretório correto
+COPY realm-export.json /opt/keycloak/data/import/realm-export.json
+
+# Ajusta permissões dentro do contêiner na execução, não no build
+USER root
+RUN mkdir -p /opt/keycloak/data/import && chmod -R 777 /opt/keycloak/data/import
+
+# Retorna ao usuário padrão do Keycloak
+USER keycloak
+
+# Configura as variáveis como ENV no contêiner
+ENV KEYCLOAK_ADMIN=$KEYCLOAK_ADMIN
+ENV KEYCLOAK_ADMIN_PASSWORD=$KEYCLOAK_ADMIN_PASSWORD
+
+# Expondo a porta do Keycloak
+EXPOSE 8080
+
+# Define o comando de inicialização do Keycloak com a importação do realm
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm"]
