@@ -42,7 +42,7 @@ docker run -p 8080:8080 -e KEYCLOAK_ADMIN=fiap -e KEYCLOAK_ADMIN_PASSWORD=fiap12
 
 [http://localhost:8080](http://localhost:8080)
 
-Use as credenciais definidas no arquivo .env para as variáveis de ambiente `KEYCLOAK_ADMIN` e `KEYCLOAK_ADMIN_PASSWORD` para fazer login.
+Use as credenciais definidas no script para executar o container para logar como administrador no console do keycloak.
 
 ---
 
@@ -95,6 +95,33 @@ Você pode criar usuários programaticamente utilizando a API REST do Keycloak.
 3. **Confirme o sucesso**:
 
    - Verifique no Keycloak (interface web ou API) se o usuário foi criado corretamente.
+
+4. **Microserviço de autenticação**:
+   Para não deixar exposto as credenciais e centralizar os acessos foi criado o microserviço de autenticação,
+   nele so possui dois endpoint, um para criar o usuario e o outro para gerar o token jwt que será validado em outros
+   microserviços:
+
+##### Criação de usuário
+Para criar usuario faça um post no endpoint http://localhost:8081/users passando o json seguindo o formato do exemplo abaixo.
+
+   ```json
+   {
+   "username": "fiaphacka",
+   "email": "fiaphacka@example.com",
+   "password": "fiap123"
+}
+   ```
+
+##### Gerar token jwt
+Para gerar um token jwt faça um post no endpoint http://localhost:8081/users/validate passando o json seguindo o formato do exemplo abaixo.
+
+   ```json
+   {
+   "username": "fiaphacka",
+   "email": "fiaphacka@example.com",
+   "password": "fiap123"
+}
+   ```
 
 ---
 
